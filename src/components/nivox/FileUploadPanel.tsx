@@ -4,8 +4,9 @@ import { AlertCircle, FileAudio, Loader2, UploadCloud } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { DEMO_RESULT, analyzeAudio, type AnalysisResult } from "@/lib/nivox-api";
+import { analyzeAudio, type AnalysisResult } from "@/lib/nivox-api";
 
+import { EmptyResults } from "./EmptyResults";
 import { ResultDashboard } from "./ResultDashboard";
 import { riskStyles } from "./risk-ui";
 
@@ -134,11 +135,14 @@ export function FileUploadPanel() {
         </div>
       )}
 
-      <ResultDashboard
-        result={result ?? DEMO_RESULT}
-        isDemo={result === null}
-        {...(updatedAt ? { updatedAt } : {})}
-      />
+      {result ? (
+        <ResultDashboard result={result} {...(updatedAt ? { updatedAt } : {})} />
+      ) : (
+        <EmptyResults
+          title="No file analysed yet"
+          description="Upload a WAV or MP3 file to see risk level, speaker match, detector verdicts and acoustic explainability returned by the analysis API."
+        />
+      )}
     </div>
   );
 }
