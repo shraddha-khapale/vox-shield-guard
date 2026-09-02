@@ -117,11 +117,9 @@ function ExplainabilityRow({
 
 export function ResultDashboard({
   result,
-  isDemo,
   updatedAt,
 }: {
   result: AnalysisResult;
-  isDemo?: boolean;
   updatedAt?: string;
 }) {
   const styles = riskStyles[result.risk_level];
@@ -135,13 +133,7 @@ export function ResultDashboard({
 
   return (
     <div key={updatedAt} className="animate-data-in space-y-6">
-      {isDemo && (
-        <div className="rounded-lg border border-dashed border-border bg-muted/40 px-4 py-3 text-sm text-muted-foreground">
-          <span className="font-semibold text-foreground">Sample / demo data</span> — this is a
-          labelled example so you can see the layout. Start a live call or upload a file to replace
-          it with real analysis.
-        </div>
-      )}
+
 
       <Card className={cn("border-2 bg-surface-elevated", styles.border, styles.bg)}>
         <CardContent className="space-y-6 pt-6">
