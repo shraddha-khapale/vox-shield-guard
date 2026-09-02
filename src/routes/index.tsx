@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ShieldCheck } from "lucide-react";
+import { Activity } from "lucide-react";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { API_BASE_URL } from "@/lib/nivox-api";
 import { FileUploadPanel } from "@/components/nivox/FileUploadPanel";
 import { LiveCallPanel } from "@/components/nivox/LiveCallPanel";
+import { PageHeader } from "@/components/nivox/PageHeader";
 
 export const Route = createFileRoute("/")({
   head: () => ({
