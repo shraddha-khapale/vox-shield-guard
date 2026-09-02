@@ -10,21 +10,21 @@ export const riskStyles: Record<
   LOW: {
     text: "text-risk-low",
     bg: "bg-risk-low/10",
-    border: "border-risk-low/40",
+    border: "border-risk-low/60",
     bar: "bg-risk-low",
     label: "Low risk",
   },
   MEDIUM: {
     text: "text-risk-medium",
     bg: "bg-risk-medium/10",
-    border: "border-risk-medium/40",
+    border: "border-risk-medium/70",
     bar: "bg-risk-medium",
     label: "Medium risk",
   },
   HIGH: {
     text: "text-risk-high",
     bg: "bg-risk-high/10",
-    border: "border-risk-high/40",
+    border: "border-risk-high/80",
     bar: "bg-risk-high",
     label: "High risk",
   },
@@ -69,9 +69,11 @@ export function MeterBar({
     muted: "bg-muted-foreground",
   }[tone];
   return (
-    <div className={cn("h-2 w-full overflow-hidden rounded-full bg-muted", className)}>
+    <div
+      className={cn("h-2 w-full overflow-hidden rounded-none border border-border bg-muted", className)}
+    >
       <div
-        className={cn("h-full rounded-full transition-[width] duration-700 ease-out", toneClass)}
+        className={cn("h-full rounded-none transition-[width] duration-700 ease-out", toneClass)}
         style={{ width: `${pct}%` }}
       />
     </div>
