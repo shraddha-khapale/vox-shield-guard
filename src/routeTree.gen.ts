@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as SpeakersRouteImport } from './routes/speakers'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HistoryRoute = HistoryRouteImport.update({
@@ -31,30 +37,34 @@ const SpeakersRoute = SpeakersRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/history': typeof HistoryRoute
   '/speakers': typeof SpeakersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/history': typeof HistoryRoute
   '/speakers': typeof SpeakersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/history': typeof HistoryRoute
   '/speakers': typeof SpeakersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/history' | '/speakers'
+  fullPaths: '/' | '/about' | '/history' | '/speakers'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/history' | '/speakers'
-  id: '__root__' | '/' | '/history' | '/speakers'
+  to: '/' | '/about' | '/history' | '/speakers'
+  id: '__root__' | '/' | '/about' | '/history' | '/speakers'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   HistoryRoute: typeof HistoryRoute
   SpeakersRoute: typeof SpeakersRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/history': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   HistoryRoute: HistoryRoute,
   SpeakersRoute: SpeakersRoute,
 }
