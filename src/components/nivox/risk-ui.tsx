@@ -69,9 +69,11 @@ export function MeterBar({
     muted: "bg-muted-foreground",
   }[tone];
   return (
-    <div className={cn("h-2 w-full overflow-hidden rounded-full bg-muted", className)}>
+    <div
+      className={cn("h-2 w-full overflow-hidden rounded-none border border-border bg-muted", className)}
+    >
       <div
-        className={cn("h-full rounded-full transition-[width] duration-700 ease-out", toneClass)}
+        className={cn("h-full rounded-none transition-[width] duration-700 ease-out", toneClass)}
         style={{ width: `${pct}%` }}
       />
     </div>
