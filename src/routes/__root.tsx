@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { AppSidebar } from "@/components/nivox/AppSidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 function NotFoundComponent() {
   return (
@@ -125,8 +127,29 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <SidebarProvider>
+        <div className="flex min-h-screen w-full bg-background text-foreground">
+          <AppSidebar />
+          <div className="flex min-w-0 flex-1 flex-col">
+            <header className="sticky top-0 z-10 flex h-14 items-center gap-3 border-b border-border bg-surface/80 px-4 backdrop-blur">
+              <SidebarTrigger />
+              <p className="text-sm font-medium tracking-tight">
+                NIVOX Voice Defense
+                <span className="ml-2 hidden text-xs font-normal text-muted-foreground sm:inline">
+                  Real-time voice authenticity &amp; deepfake detection
+                </span>
+              </p>
+            </header>
+            <main className="flex-1 px-4 py-6 sm:px-6 sm:py-8">
+              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+              <Outlet />
+            </main>
+            <footer className="border-t border-border px-4 py-5 text-center text-xs text-muted-foreground sm:px-6">
+              Client-side analyst console · all analysis performed by the configured NIVOX API
+            </footer>
+          </div>
+        </div>
+      </SidebarProvider>
     </QueryClientProvider>
   );
 }

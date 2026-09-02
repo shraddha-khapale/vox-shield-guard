@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import {
-  DEMO_RESULT,
   analyzeAudio,
   type AnalysisResult,
   type TimelineEvent,
 } from "@/lib/nivox-api";
 
+import { EmptyResults } from "./EmptyResults";
 import { ResultDashboard } from "./ResultDashboard";
 import { RiskIcon, riskStyles } from "./risk-ui";
 
@@ -148,8 +148,6 @@ export function LiveCallPanel() {
     setPending(0);
   }, [cleanup]);
 
-  const showDemo = result === null;
-
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
       <div className="space-y-6">
@@ -203,11 +201,14 @@ export function LiveCallPanel() {
           </div>
         )}
 
-        <ResultDashboard
-          result={result ?? DEMO_RESULT}
-          isDemo={showDemo}
-          {...(updatedAt ? { updatedAt } : {})}
-        />
+        {result ? (
+          <ResultDashboard result={result} {...(updatedAt ? { updatedAt } : {})} />
+        ) : (
+          <EmptyResults
+            title="No live analysis yet"
+            description="Start a call to stream microphone audio to the analysis API. Each returned chunk populates the dashboard and the call timeline."
+          />
+        )}
       </div>
 
       <Card className="h-fit bg-surface-elevated lg:sticky lg:top-6">

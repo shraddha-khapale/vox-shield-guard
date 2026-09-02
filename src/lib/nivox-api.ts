@@ -136,39 +136,6 @@ export async function analyzeAudio(
   return mapAnalysisResponse(json);
 }
 
-/** Clearly labelled sample payload used to demonstrate the UI before any real call. */
-export const DEMO_RESULT: AnalysisResult = mapAnalysisResponse({
-  risk_level: "MEDIUM",
-  recommended_action: "Escalate to step-up verification before authorising any transaction.",
-  reasons: [
-    "Speaker similarity below enrolment threshold (0.61 < 0.75)",
-    "Random Forest acoustic model flagged unnatural shimmer",
-    "AASIST3 neural score in the uncertain band",
-  ],
-  speaker_result: {
-    predicted_speaker: "speaker_04 (A. Mehta)",
-    similarity: 0.61,
-    all_scores: {
-      "speaker_04 (A. Mehta)": 0.61,
-      "speaker_11 (R. Osei)": 0.44,
-      "speaker_02 (L. Chen)": 0.29,
-      "speaker_07 (D. Novak)": 0.18,
-    },
-  },
-  synthetic_result: {
-    aasist_score: 0.52,
-    rf_score: 0.78,
-    combined_score: 0.65,
-    flagged_by: ["random_forest"],
-  },
-  explainability: {
-    jitter_local: 0.019,
-    shimmer_local: 0.071,
-    hnr: 14.2,
-    f0_mean: 138.4,
-    f0_std: 11.7,
-  },
-});
 
 export const REFERENCE_RANGES: Record<
   keyof Explainability,
